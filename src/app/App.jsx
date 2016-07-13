@@ -1,8 +1,12 @@
 import React from 'react'
 
+import Footer from '../Footer'
+import Main from './Main'
+
 const App = () => (
   <div>
-    Quark rules!
+    <Main />
+    <Footer />
   </div>
 )
 
