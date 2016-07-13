@@ -1,15 +1,14 @@
 import path from 'path'
+import ExtractTextPlugin from 'extract-text-webpack-plugin'
 import rucksack from 'rucksack-css'
-import { getPlugins } from './utils/webpack.utils'
+import { getPlugins, getEntries } from './utils/webpack.utils'
 
 const isProd = process.env.NODE_ENV === 'prod'
 const plugins = getPlugins(isProd)
 
 module.exports = {
-  entry: [
-    'webpack-hot-middleware/client',
-    './src/index.js',
-  ],
+  context: __dirname,
+  entry: getEntries(isProd),
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
@@ -19,7 +18,7 @@ module.exports = {
     loaders: [
       {
         test: /\.s?css$/,
-        loaders: ['style', 'css', 'postcss', 'sass'],
+        loader: ExtractTextPlugin.extract('style', 'css', 'postcss', 'sass'),
       },
       {
         test: /\.jsx?$/,
@@ -29,14 +28,25 @@ module.exports = {
           presets: ['react', 'es2015', 'stage-1'],
         },
       },
+      {
+        test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        loader: 'url?limit=10000&mimetype=application/font-woff',
+      },
+      {
+        test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        loader: 'file',
+      },
     ],
   },
   postcss: () => [
     rucksack({ autoprefixer: true }),
   ],
-  plugins,
+  plugins: [
+    new ExtractTextPlugin('bundle.css'),
+    ...plugins,
+  ],
   debug: true,
-  devtool: 'cheap-module-eval-source-map',
+  devtool: '#source-map',
   resolve: {
     extensions: ['', '.js', '.jsx'],
   },

@@ -56,3 +56,15 @@ export function getPlugins(isProd) {
   const GLOBALS = defineGlobals(isProd ? 'production' : 'development')
   return isProd ? prodPlugins(GLOBALS) : devPlugins(GLOBALS)
 }
+
+/**
+ * Returns the entries according to the enviroment
+ *
+ * @param {Boolean}  is production
+ * @return {Array}  app entry files
+ */
+export function getEntries(isProd) {
+  return isProd ?
+    ['./src/index.js'] :
+    ['webpack-hot-middleware/client?path=/__webpack_hmr', './src/index.js']
+}
