@@ -4,7 +4,6 @@ import rucksack from 'rucksack-css'
 import { getPlugins, getEntries } from './utils/webpack.utils'
 
 const isProd = process.env.NODE_ENV === 'prod'
-const plugins = getPlugins(isProd)
 
 module.exports = {
   context: __dirname,
@@ -18,7 +17,7 @@ module.exports = {
     loaders: [
       {
         test: /\.s?css$/,
-        loader: ExtractTextPlugin.extract('style', 'css', 'postcss', 'sass'),
+        loader: ExtractTextPlugin.extract('style', 'css!postcss!sass'),
       },
       {
         test: /\.jsx?$/,
@@ -41,10 +40,7 @@ module.exports = {
   postcss: () => [
     rucksack({ autoprefixer: true }),
   ],
-  plugins: [
-    new ExtractTextPlugin('bundle.css'),
-    ...plugins,
-  ],
+  plugins: getPlugins(isProd),
   debug: true,
   devtool: '#source-map',
   resolve: {

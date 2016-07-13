@@ -1,4 +1,5 @@
 import webpack from 'webpack'
+import ExtractTextPlugin from 'extract-text-webpack-plugin'
 
 /**
  * Returns the global variables
@@ -22,6 +23,7 @@ function defineGlobals(enviroment) {
  */
 function prodPlugins(globals) {
   return [
+    new ExtractTextPlugin('bundle.css'),
     new webpack.DefinePlugin(globals),
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.NoErrorsPlugin(),
@@ -39,6 +41,7 @@ function prodPlugins(globals) {
  */
 function devPlugins(globals) {
   return [
+    new ExtractTextPlugin('bundle.css'),
     new webpack.DefinePlugin(globals),
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
