@@ -1,5 +1,8 @@
-import webpack from 'webpack'
-import ExtractTextPlugin from 'extract-text-webpack-plugin'
+const webpack = require('webpack')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
+
+// eslint-disable-next-line no-use-before-define
+module.exports = { getPlugins, getEntries }
 
 /**
  * Returns the global variables
@@ -16,7 +19,7 @@ function defineGlobals(enviroment) {
 }
 
 /**
- * Production specific plugins
+ * Production build specific plugins
  *
  * @param {Object}  globals to define
  * @returns {Array} plugins
@@ -33,9 +36,8 @@ function prodPlugins(globals) {
 }
 
 /**
- * Production specific plugins
+ * Development specific plugins
  *
- * @param {Object}  globals to define
  * @param {Object}  globals to define
  * @returns {Array} plugins
  */
@@ -44,7 +46,6 @@ function devPlugins(globals) {
     new ExtractTextPlugin('bundle.css'),
     new webpack.DefinePlugin(globals),
     new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
   ]
 }
@@ -55,7 +56,7 @@ function devPlugins(globals) {
  * @param {Boolean}  is production
  * @return {Array}  webpack plugins instances
  */
-export function getPlugins(isProd) {
+function getPlugins(isProd) {
   const GLOBALS = defineGlobals(isProd ? 'production' : 'development')
   return isProd ? prodPlugins(GLOBALS) : devPlugins(GLOBALS)
 }
@@ -66,8 +67,6 @@ export function getPlugins(isProd) {
  * @param {Boolean}  is production
  * @return {Array}  app entry files
  */
-export function getEntries(isProd) {
-  return isProd ?
-    ['./src/index.js'] :
-    ['webpack-hot-middleware/client?path=/__webpack_hmr', './src/index.js']
+function getEntries() {
+  return ['./src/index.js']
 }

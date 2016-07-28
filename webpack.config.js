@@ -1,15 +1,16 @@
-import path from 'path'
-import ExtractTextPlugin from 'extract-text-webpack-plugin'
-import rucksack from 'rucksack-css'
-import { getPlugins, getEntries } from './utils/webpack.utils'
+const path = require('path')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const rucksack = require('rucksack-css')
+const { getPlugins, getEntries } = require('./utils/webpack.utils')
 
-const isProd = process.env.NODE_ENV === 'prod'
+const enviroment = process.env.NODE_ENV
+const isProd = enviroment === 'prod'
 
 module.exports = {
   context: __dirname,
-  entry: getEntries(isProd),
+  entry: getEntries(enviroment),
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, './public'),
     filename: 'bundle.js',
     publicPath: '/',
   },
@@ -42,9 +43,18 @@ module.exports = {
   ],
   plugins: getPlugins(isProd),
   debug: true,
-  devtool: '#source-map',
+  devtool: 'eval-source-map',
   resolve: {
     extensions: ['', '.js', '.jsx'],
   },
   colors: true,
+  devServer: {
+    historyApiFallback: true,
+    hot: true,
+    inline: true,
+    progress: true,
+    host: 'localhost',
+    port: process.env.PORT || 3000,
+    contentBase: './public',
+  },
 }
