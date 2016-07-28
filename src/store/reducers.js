@@ -1,5 +1,5 @@
-import { combineReducers } from 'redux'
+import home from '../app/home.reducer'
 
-export default combineReducers({
-  example: (state = {}) => state,
-})
+export default {
+  home,
+}
