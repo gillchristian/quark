@@ -6,7 +6,7 @@ import * as types from './home.types'
  * @param {String}  value
  * @returns {Object}  action creator
  */
-export const updateValue = (value) => ({
+export const updateValue = value => ({
   type: types.UPDATE_VALUE,
   payload: value,
 })

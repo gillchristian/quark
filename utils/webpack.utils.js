@@ -68,5 +68,8 @@ function getPlugins(isProd) {
  * @return {Array}  app entry files
  */
 function getEntries() {
-  return ['./src/index.js']
+  return [
+    'babel-polyfill',
+    './src/index.js',
+  ]
 }

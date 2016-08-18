@@ -1,11 +1,18 @@
 {
+  "parser": "babel-eslint",
   "extends": "airbnb",
+  "plugins": [
+    "babel",
+    "react",
+    "import"
+  ],
   "parserOptions": {
     "ecmaFeatures": {
       "experimentalObjectRestSpread": true
     },
   },
   "rules": {
-    "semi": [2, "never"]
+    "semi": [2, "never"],
+    "babel/arrow-parens": ["error", "as-needed"]
   }
 }
