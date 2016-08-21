@@ -8,20 +8,17 @@ import Home from './Home'
 import Message from './Message'
 import NotFound from './NotFound'
 
-const Root = ({ store }) => {
-  const history = syncHistoryWithStore(browserHistory, store)
-  return (
-    <Provider store={store}>
-      <Router history={history}>
-        <Route path="/" component={App} >
-          <IndexRoute component={Home} />
-          <Route path="(:quark)" component={Message} />
-          <Route path="*" component={NotFound} />
-        </Route>
-      </Router>
-    </Provider>
-  )
-}
+const Root = ({ store }) => (
+  <Provider store={store}>
+    <Router history={syncHistoryWithStore(browserHistory, store)}>
+      <Route path="/" component={App} >
+        <IndexRoute component={Home} />
+        <Route path="(:quark)" component={Message} />
+        <Route path="*" component={NotFound} />
+      </Route>
+    </Router>
+  </Provider>
+)
 
 Root.propTypes = {
   store: PropTypes.object.isRequired,
