@@ -1,5 +1,5 @@
-import home from '../app/home.reducer'
+import homeReducer from '../app/home.store'
 
 export default {
-  home,
+  home: homeReducer,
 }

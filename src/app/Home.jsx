@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
 
-import { updateValue } from './home.actions'
+import { updateValue } from './home.store'
 
 import classnames from 'classnames'
 
