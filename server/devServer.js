@@ -15,7 +15,6 @@ app.use(webpackDevMiddleware(compiler, {
 
 // Step 3: Attach the hot middleware to the compiler & the server
 app.use(require('webpack-hot-middleware')(compiler, {
-  // eslint-disable-next-line no-console
   log: console.log, path: '/__webpack_hmr', heartbeat: 10 * 1000,
 }))
 
@@ -24,7 +23,6 @@ app.get('/*', (req, res) => {
 })
 
 app.listen(port, error => {
-  /* eslint-disable no-console */
   if (error) {
     console.error(error)
   } else {
@@ -33,5 +31,4 @@ app.listen(port, error => {
       Open up http://localhost:${port}/ in your browser.`
     )
   }
-  /* eslint-enable no-console */
 })

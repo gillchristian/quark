@@ -13,6 +13,7 @@
   },
   "rules": {
     "semi": [2, "never"],
-    "babel/arrow-parens": ["error", "as-needed"]
+    "babel/arrow-parens": ["error", "as-needed"],
+    "no-console": 0
   }
 }
