@@ -27,3 +27,25 @@
 @import 'components/components';
 /* --- Trumps --------- */
 @import 'trumps/trumps';
+
+.main {
+  display: block;
+  width: 100%;
+  min-height: 100vh;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  & > * {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .quark {
+    height: 80vh;
+  }
+  .footer {
+    height: 10vh;
+    flex-direction: column;
+  }
+}

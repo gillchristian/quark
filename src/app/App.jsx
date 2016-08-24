@@ -1,19 +1,16 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
+
+import { Icon } from 'react-fa'
 
 import Footer from '../Footer'
-import Main from './Main'
 
-const App = ({ children }) => (
-  <div>
-    <Main>
-      {children}
-    </Main>
+const App = () => (
+  <div className="main">
+    <div className="quark">
+      <h1>Quark <Icon name="fire" /></h1>
+    </div>
     <Footer />
   </div>
 )
-
-App.propTypes = {
-  children: PropTypes.node,
-}
 
 export default App
