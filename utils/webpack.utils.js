@@ -31,7 +31,7 @@ function prodPlugins(globals) {
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.NoErrorsPlugin(),
     new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.UglifyJsPlugin(),
+    new webpack.optimize.UglifyJsPlugin({ warnings: false }),
   ]
 }
 
@@ -43,6 +43,7 @@ function prodPlugins(globals) {
  */
 function devPlugins(globals) {
   return [
+    new webpack.HotModuleReplacementPlugin(),
     new ExtractTextPlugin('bundle.css'),
     new webpack.DefinePlugin(globals),
     new webpack.optimize.OccurenceOrderPlugin(),
@@ -67,9 +68,17 @@ function getPlugins(isProd) {
  * @param {Boolean}  is production
  * @return {Array}  app entry files
  */
-function getEntries() {
+function getEntries(isProd) {
+  if (isProd) {
+    return [
+      'babel-polyfill',
+      './src/index',
+    ]
+  }
   return [
+    `webpack-dev-server/client?http://localhost:${process.env.PORT || 3000}`,
+    'webpack/hot/dev-server',
     'babel-polyfill',
-    './src/index.js',
+    './src/index',
   ]
 }

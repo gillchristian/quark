@@ -8,7 +8,7 @@ const isProd = enviroment === 'prod'
 
 module.exports = {
   context: __dirname,
-  entry: getEntries(enviroment),
+  entry: getEntries(isProd),
   output: {
     path: path.resolve(__dirname, './public'),
     filename: 'bundle.js',
@@ -30,7 +30,7 @@ module.exports = {
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        loader: 'babel',
+        loaders: ['react', 'babel'],
       },
       {
         test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,

@@ -9,11 +9,9 @@ const port = process.env.PORT || 3000
 
 const compiler = webpack(config)
 app.use(webpackDevMiddleware(compiler, {
-  noInfo: false,
   publicPath: config.output.publicPath,
 }))
 
-// Step 3: Attach the hot middleware to the compiler & the server
 app.use(require('webpack-hot-middleware')(compiler, {
   log: console.log, path: '/__webpack_hmr', heartbeat: 10 * 1000,
 }))
